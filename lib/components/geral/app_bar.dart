@@ -19,7 +19,7 @@ class _AppBarComponentState extends State<AppBarComponent> {
       leadingWidth: size.width * .2,
       backgroundColor: Colors.grey.shade800,
       leading: Container(
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         child: Align(
           alignment: Alignment.centerLeft,
           child: FittedBox(
@@ -53,18 +53,18 @@ class _AppBarComponentState extends State<AppBarComponent> {
               rota: '/',
               title: 'Pagina Inicial',
             ),
-            ButtonsAppBar(
-              rota: '/user',
-              title: 'Usuário',
-            ),
-            ButtonsAppBar(
-              rota: '/',
-              title: 'Funcoes',
-            ),
-            ButtonsAppBar(
-              rota: '/',
-              title: 'Guia',
-            ),
+            // ButtonsAppBar(
+            //   rota: '/user',
+            //   title: 'Usuário',
+            // ),
+            // ButtonsAppBar(
+            //   rota: '/',
+            //   title: 'Funcoes',
+            // ),
+            // ButtonsAppBar(
+            //   rota: '/',
+            //   title: 'Guia',
+            // ),
             ButtonsAppBar(
               rota: '/series',
               title: 'Series',

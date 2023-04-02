@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-import '../components/app_bar.dart';
+import '../components/geral/app_bar.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
