@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class HitoricoRegistroCard extends StatefulWidget {
-  const HitoricoRegistroCard({super.key});
-
+class CapituloFeitoCard extends StatefulWidget {
+  const CapituloFeitoCard({super.key, required this.constraints});
+  final BoxConstraints constraints;
   @override
-  State<HitoricoRegistroCard> createState() => HitoricoRegistroCardState();
+  State<CapituloFeitoCard> createState() => HitoricoRegistroCardState();
 }
 
-class HitoricoRegistroCardState extends State<HitoricoRegistroCard> {
+class HitoricoRegistroCardState extends State<CapituloFeitoCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: widget.constraints.maxHeight * 0.1,
       decoration: BoxDecoration(
           color: Colors.grey.shade900, borderRadius: BorderRadius.circular(10)),
       padding: EdgeInsets.all(10),

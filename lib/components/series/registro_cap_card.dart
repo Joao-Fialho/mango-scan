@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mango_staff/components/series/resgistro_cap_por_funcao_button.dart';
 
+import '../../domain/series_datasource.dart';
+
 class RegistroCapCard extends StatefulWidget {
   const RegistroCapCard({super.key});
 
@@ -107,7 +109,11 @@ class _RegistroCapCardState extends State<RegistroCapCard> {
                           ],
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () async {
+                            setState(() async {
+                              await AllDatasource().fetchAll();
+                            });
+                          },
                           child: Container(
                             alignment: Alignment.center,
                             decoration: BoxDecoration(

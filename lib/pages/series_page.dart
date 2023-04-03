@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mango_staff/components/series/historico_capitulos_card.dart';
 import '../components/geral/app_bar.dart';
-import '../components/series/historico_registro_card.dart';
+import '../components/series/capitulo_feito_card.dart';
 import '../components/series/registro_cap_card.dart';
 
 class SeriesPage extends StatefulWidget {
@@ -25,36 +26,47 @@ class _SeriesPageState extends State<SeriesPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ///Historico de Registros
+
               Container(
-                padding: EdgeInsets.all(15),
-                width: size.width * 0.25,
                 height: size.height * 0.85,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade800,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Valor total: R\$100,00',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ///Barra de pesquisa
+                    Container(
+                      alignment: Alignment.center,
+                      width: size.width * 0.25,
+                      height: size.width * .04,
+                      child: TextFormField(
+                        cursorColor: Colors.white,
+                        textInputAction: TextInputAction.search,
+                        style: TextStyle(
+                          fontSize: size.width * .009,
+                          color: Colors.white,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        decoration: InputDecoration(
+                          labelText: 'Pesquisar',
+                          contentPadding: const EdgeInsets.only(
+                              left: 11, bottom: 11, top: 11, right: 5),
+                          labelStyle: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                                  const BorderSide(color: Colors.white)),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                                  const BorderSide(color: Colors.white)),
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    'Historico De Registro',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Container(child: HitoricoRegistroCard())
-                ]),
+                   HistoricoCapitulosCard()
+                  ],
+                ),
               ),
 
               ///Lista de series para resgistrarem
