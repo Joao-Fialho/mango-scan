@@ -1,7 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mango_staff/pages/inicial_page.dart';
-import 'package:mango_staff/pages/series_page.dart';
-import 'package:mango_staff/pages/user_page.dart';
+import 'package:mango_staff/presenter/pages/inicial_page.dart';
+import 'package:mango_staff/presenter/pages/pocs_page.dart';
+import 'package:mango_staff/presenter/pages/series_page.dart';
+import 'package:mango_staff/presenter/pages/user_page.dart';
 
 class AppModule extends Module {
   @override
@@ -21,6 +22,9 @@ class AppModule extends Module {
         transition: TransitionType.noTransition),
     ChildRoute('/series',
         child: (context, args) => const SeriesPage(),
+        transition: TransitionType.noTransition),
+    ChildRoute('/pocs',
+        child: (context, args) => const PocsPage(),
         transition: TransitionType.noTransition),
 
     // ModuleRoute('/dash', module: DashboardModule()),

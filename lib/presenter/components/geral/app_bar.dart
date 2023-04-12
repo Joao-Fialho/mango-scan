@@ -15,7 +15,6 @@ class _AppBarComponentState extends State<AppBarComponent> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return AppBar(
-      toolbarHeight: size.height * .1,
       leadingWidth: size.width * .2,
       backgroundColor: Colors.grey.shade800,
       leading: Container(
@@ -57,6 +56,10 @@ class _AppBarComponentState extends State<AppBarComponent> {
             //   rota: '/user',
             //   title: 'Usuário',
             // ),
+            ButtonsAppBar(
+              rota: '/pocs',
+              title: 'Pocs',
+            ),
             // ButtonsAppBar(
             //   rota: '/',
             //   title: 'Funcoes',
@@ -74,6 +77,7 @@ class _AppBarComponentState extends State<AppBarComponent> {
       ),
       actions: [
         Container(
+          margin: EdgeInsets.only(right: 11),
           alignment: Alignment.center,
           width: size.width * .15,
           height: size.width * .015,

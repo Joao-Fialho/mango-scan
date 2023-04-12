@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mango_staff/components/geral/app_bar.dart';
+import 'package:mango_staff/presenter/components/geral/app_bar.dart';
 
 import '../components/geral/bottom_navigation_bar_custom.dart';
 
@@ -14,7 +14,7 @@ class _InicialPageState extends State<InicialPage> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-
+    print(size.width);
     return Scaffold(
         backgroundColor: Colors.grey.shade900,
         appBar: AppBarComponent(),
@@ -25,7 +25,7 @@ class _InicialPageState extends State<InicialPage> {
             top: size.width * 0.025,
             bottom: size.width * 0.025,
           ),
-          child: FittedBox(
+          child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,

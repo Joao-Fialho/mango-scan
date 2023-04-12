@@ -5,8 +5,11 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'capitulo_feito_card.dart';
 
 class HistoricoCapitulosCard extends StatefulWidget {
-  const HistoricoCapitulosCard({super.key});
-
+  const HistoricoCapitulosCard({
+    super.key,
+    required this.constraints,
+  });
+  final BoxConstraints constraints;
   @override
   State<HistoricoCapitulosCard> createState() => _HistoricoCapitulosCardState();
 }
@@ -17,12 +20,12 @@ class _HistoricoCapitulosCardState extends State<HistoricoCapitulosCard> {
     final Size size = MediaQuery.of(context).size;
 
     return Container(
-      padding: EdgeInsets.all(15),
-      width: size.width * 0.25,
-      height: size.height * 0.75,
+      width: widget.constraints.maxWidth,
+      height: widget.constraints.maxHeight * .9,
+      padding: EdgeInsets.all(size.width * 0.01),
       decoration: BoxDecoration(
         color: Colors.grey.shade800,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(size.width * 0.01),
       ),
       child: LayoutBuilder(builder: (context, constraints) {
         return Column(
@@ -48,8 +51,7 @@ class _HistoricoCapitulosCardState extends State<HistoricoCapitulosCard> {
                 ),
               ),
               Container(
-                width: size.width * 0.25,
-                height: size.height * 0.6,
+                height: constraints.maxHeight * 0.85,
                 child: ListView.separated(
                   separatorBuilder: (context, index) => SizedBox(
                     height: size.height * 0.01,

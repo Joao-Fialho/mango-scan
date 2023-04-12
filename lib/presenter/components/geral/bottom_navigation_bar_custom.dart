@@ -15,6 +15,7 @@ class BottomNavigationBarCustomState extends State<BottomNavigationBarCustom> {
 
     return Container(
       height: size.height * 0.15,
+      width: size.width,
       child: FittedBox(
         fit: BoxFit.fitWidth,
         child: Column(
