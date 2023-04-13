@@ -1,3 +1,4 @@
 {
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "dart.flutterSdkPath": "C:\\Users\\fialh\\fvm\\versions\\3.7.6"
 }

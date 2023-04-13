@@ -27,10 +27,9 @@ class _PocsPageState extends State<PocsPage> {
         height: double.infinity,
         width: double.infinity, alignment: Alignment.center,
 
-        padding: EdgeInsets.all(100),
-        //margin: EdgeInsets.all(200),
-        //child: SeriesSearchBarComponent(constraints: size),
-        // child: RegistroCapCard(),
+        margin: EdgeInsets.all(10),
+        // child: SeriesSearchBarComponent(constraints: size),
+        child: RegistroCapCard(),
       ),
     );
   }

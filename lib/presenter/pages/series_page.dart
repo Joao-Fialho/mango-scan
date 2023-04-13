@@ -17,7 +17,7 @@ class _SeriesPageState extends State<SeriesPage> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    print(size.width);
+    print("largura series ${size.width}");
 
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
@@ -27,107 +27,226 @@ class _SeriesPageState extends State<SeriesPage> {
           padding: EdgeInsets.all(size.width * .01),
           width: size.width * 0.95,
           height: size.height * 0.9,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ///Historico de Registros
-              Flexible(
-                flex: 2,
-                child: Container(
-                  height: size.height * .9,
-                  color: Colors.amber,
-                  child: LayoutBuilder(builder: (context, constraints) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ///Barra de pesquisa
-                        Flexible(
-                          flex: 1,
-                          child: SeriesSearchBarComponent(
-                            constraints: constraints,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: SizedBox(
-                            height: constraints.maxHeight * .01,
-                          ),
-                        ),
-                        Flexible(
-                            flex: 12,
-                            child: HistoricoCapitulosCard(
-                                constraints: constraints)),
-                      ],
-                    );
-                  }),
-                ),
-              ),
-              // Flexible(
-              //   flex: 1,
-              //   child: SizedBox(
-              //     width: size.width * .015,
-              //   ),
-              // ),
-
-              ///Lista de series para resgistrarem
-              Flexible(
-                flex: 5,
-                child: Container(
-                  color: Colors.red,
-                  width: size.width * 0.63,
-                  child: ListView.separated(
-                      separatorBuilder: (context, index) => SizedBox(
-                            height: size.height * 0.01,
-                          ),
-                      itemCount: 100,
-                      itemBuilder: (context, index) {
-                        if (size.width < 1930) {
-                          return Container(
-                            height: size.width * 0.15,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: const [
-                                Flexible(
-                                  flex: 4,
-                                  child: RegistroCapCard(),
-                                ),
-                                Flexible(
-                                  flex: 4,
-                                  child: RegistroCapCard(),
-                                ),
-                              ],
+          child: LayoutBuilder(builder: (context, constraints) {
+            if (size.width > 688 && size.width < 1930) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ///Historico de Registros
+                  Flexible(
+                    flex: 2,
+                    child: Container(
+                      height: size.height * .9,
+                      color: Colors.amber,
+                      child: LayoutBuilder(builder: (context, constraints) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ///Barra de pesquisa
+                            Flexible(
+                              flex: 1,
+                              child: SeriesSearchBarComponent(
+                                constraints: constraints,
+                              ),
                             ),
-                          );
-                        } else if (size.width > 1930) {
-                          return Container(
-                            height: size.width * 0.11,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Flexible(
-                                  flex: 4,
-                                  child: RegistroCapCard(),
-                                ),
-                                Flexible(
-                                  flex: 4,
-                                  child: RegistroCapCard(),
-                                ),
-                                Flexible(
-                                  flex: 4,
-                                  child: RegistroCapCard(),
-                                ),
-                              ],
+                            Flexible(
+                              flex: 1,
+                              child: SizedBox(
+                                height: constraints.maxHeight * .01,
+                              ),
                             ),
-                          );
-                        } else {
-                          return RegistroCapCard();
-                        }
+                            Flexible(
+                                flex: 12,
+                                child: HistoricoCapitulosCard(
+                                    constraints: constraints)),
+                          ],
+                        );
                       }),
-                ),
-              ),
-            ],
-          ),
+                    ),
+                  ),
+                  // Flexible(
+                  //   flex: 1,
+                  //   child: SizedBox(
+                  //     width: size.width * .015,
+                  //   ),
+                  // ),
+
+                  ///Lista de series para resgistrarem
+                  Flexible(
+                    flex: 5,
+                    child: Container(
+                      color: Colors.red,
+                      width: size.width * 0.63,
+                      child: ListView.separated(
+                          separatorBuilder: (context, index) => SizedBox(
+                                height: size.height * 0.01,
+                              ),
+                          itemCount: 100,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              height: size.width * 0.15,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: const [
+                                  Flexible(
+                                    flex: 4,
+                                    child: RegistroCapCard(),
+                                  ),
+                                  Flexible(
+                                    flex: 4,
+                                    child: RegistroCapCard(),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                    ),
+                  ),
+                ],
+              );
+            } else if (size.width < 688) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ///Historico de Registros
+                  Flexible(
+                    flex: 3,
+                    child: Container(
+                      height: size.height * .9,
+                      color: Colors.amber,
+                      child: LayoutBuilder(builder: (context, constraints) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ///Barra de pesquisa
+                            Flexible(
+                              flex: 1,
+                              child: SeriesSearchBarComponent(
+                                constraints: constraints,
+                              ),
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: SizedBox(
+                                height: constraints.maxHeight * .01,
+                              ),
+                            ),
+                            Flexible(
+                                flex: 12,
+                                child: HistoricoCapitulosCard(
+                                    constraints: constraints)),
+                          ],
+                        );
+                      }),
+                    ),
+                  ),
+
+                  ///Lista de series para resgistrarem
+                  Flexible(
+                    flex: 4,
+                    child: Container(
+                      width: size.width * 0.5,
+                      child: ListView.separated(
+                          separatorBuilder: (context, index) => SizedBox(
+                                height: size.height * 0.01,
+                              ),
+                          itemCount: 100,
+                          itemBuilder: (context, index) {
+                            return RegistroCapCard();
+                          }),
+                    ),
+                  ),
+                ],
+              );
+            } else if (size.width > 1930) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ///Historico de Registros
+                  Flexible(
+                    flex: 2,
+                    child: Container(
+                      height: size.height * .9,
+                      color: Colors.amber,
+                      child: LayoutBuilder(builder: (context, constraints) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ///Barra de pesquisa
+                            Flexible(
+                              flex: 1,
+                              child: SeriesSearchBarComponent(
+                                constraints: constraints,
+                              ),
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: SizedBox(
+                                height: constraints.maxHeight * .01,
+                              ),
+                            ),
+                            Flexible(
+                                flex: 12,
+                                child: HistoricoCapitulosCard(
+                                    constraints: constraints)),
+                          ],
+                        );
+                      }),
+                    ),
+                  ),
+                  // Flexible(
+                  //   flex: 1,
+                  //   child: SizedBox(
+                  //     width: size.width * .015,
+                  //   ),
+                  // ),
+
+                  ///Lista de series para resgistrarem
+                  Flexible(
+                    flex: 5,
+                    child: Container(
+                      color: Colors.red,
+                      width: size.width * 0.63,
+                      child: ListView.separated(
+                          separatorBuilder: (context, index) => SizedBox(
+                                height: size.height * 0.01,
+                              ),
+                          itemCount: 100,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              height: size.width * 0.11,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  Flexible(
+                                    flex: 4,
+                                    child: RegistroCapCard(),
+                                  ),
+                                  Flexible(
+                                    flex: 4,
+                                    child: RegistroCapCard(),
+                                  ),
+                                  Flexible(
+                                    flex: 4,
+                                    child: RegistroCapCard(),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return Container(
+                child: Text('Ta onde amigo??'),
+              );
+            }
+          }),
         ),
       ),
     );
