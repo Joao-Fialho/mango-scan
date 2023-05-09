@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class ButtonsAppBar extends StatefulWidget {
+class MangoAppBarButton extends StatefulWidget {
   final String title;
   final String rota;
-  const ButtonsAppBar({
+  const MangoAppBarButton({
     super.key,
     required this.title,
     required this.rota,
   });
   @override
-  State<ButtonsAppBar> createState() => _ButtonsAppBarState();
+  State<MangoAppBarButton> createState() => _MangoAppBarButtonState();
 }
 
-class _ButtonsAppBarState extends State<ButtonsAppBar> {
+class _MangoAppBarButtonState extends State<MangoAppBarButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(

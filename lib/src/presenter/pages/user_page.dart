@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:mango_staff/core/widgets/mango_app_bar.dart';
 
-import '../components/geral/app_bar.dart';
+import '../../../core/app_colors.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
@@ -15,8 +14,8 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey.shade900,
-        appBar: AppBarComponent(),
+        backgroundColor: AppColors().primaryColor,
+        appBar: MangoAppBar(),
         body: Padding(
           padding: const EdgeInsets.all(250),
           child: Column(

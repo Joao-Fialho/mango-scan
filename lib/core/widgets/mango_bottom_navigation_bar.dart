@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class BottomNavigationBarCustom extends StatefulWidget {
-  const BottomNavigationBarCustom({super.key});
+class MangoBottomNavigationBar extends StatefulWidget {
+  const MangoBottomNavigationBar({super.key});
 
   @override
-  State<BottomNavigationBarCustom> createState() =>
-      BottomNavigationBarCustomState();
+  State<MangoBottomNavigationBar> createState() =>
+      MangoBottomNavigationBarState();
 }
 
-class BottomNavigationBarCustomState extends State<BottomNavigationBarCustom> {
+class MangoBottomNavigationBarState extends State<MangoBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
-    return Container(
+    return SizedBox(
       height: size.height * 0.15,
       width: size.width,
       child: FittedBox(

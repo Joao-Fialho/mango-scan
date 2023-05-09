@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 
-class CapituloFeitoCard extends StatefulWidget {
+import '../../../../core/app_colors.dart';
+
+class CapDoneCard extends StatefulWidget {
   final BoxConstraints constraints;
-  const CapituloFeitoCard({
+  const CapDoneCard({
     super.key,
     required this.constraints,
   });
   @override
-  State<CapituloFeitoCard> createState() => HitoricoRegistroCardState();
+  State<CapDoneCard> createState() => HitoricoRegistroCardState();
 }
 
-class HitoricoRegistroCardState extends State<CapituloFeitoCard> {
+class HitoricoRegistroCardState extends State<CapDoneCard> {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 6,
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.grey.shade900,
+            color: AppColors().primaryColor,
             borderRadius:
                 BorderRadius.circular(widget.constraints.maxWidth * 0.025)),
         padding: EdgeInsets.all(widget.constraints.maxWidth * 0.02),

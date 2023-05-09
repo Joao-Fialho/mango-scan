@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mango_staff/app_module.dart';
+
+import 'app_module.dart';
 
 void main() {
   return runApp(ModularApp(module: AppModule(), child: const AppWidget()));

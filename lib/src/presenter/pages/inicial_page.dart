@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mango_staff/presenter/components/geral/app_bar.dart';
-
-import '../components/geral/bottom_navigation_bar_custom.dart';
+import 'package:mango_staff/core/widgets/mango_app_bar.dart';
+import 'package:mango_staff/core/widgets/mango_bottom_navigation_bar.dart';
+import '';
+import '../../../core/app_colors.dart';
 
 class InicialPage extends StatefulWidget {
   const InicialPage({super.key});
@@ -16,8 +17,8 @@ class _InicialPageState extends State<InicialPage> {
     final Size size = MediaQuery.of(context).size;
     print(size.width);
     return Scaffold(
-        backgroundColor: Colors.grey.shade900,
-        appBar: AppBarComponent(),
+        backgroundColor: AppColors().primaryColor,
+        appBar: MangoAppBar(),
         body: Container(
           height: size.height * .85,
           alignment: Alignment.center,
@@ -107,6 +108,6 @@ class _InicialPageState extends State<InicialPage> {
             ),
           ),
         ),
-        bottomNavigationBar: const BottomNavigationBarCustom());
+        bottomNavigationBar: const MangoBottomNavigationBar());
   }
 }

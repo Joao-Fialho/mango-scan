@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-class RegistroCapPorFuncaoButton extends StatefulWidget {
-  RegistroCapPorFuncaoButton({
+import '../../../../core/app_colors.dart';
+
+class FunctionRegisterCapButton extends StatefulWidget {
+  FunctionRegisterCapButton({
     super.key,
     required this.title,
     this.onTap,
@@ -14,12 +16,11 @@ class RegistroCapPorFuncaoButton extends StatefulWidget {
   final BoxConstraints constraints;
   bool isSelected = false;
   @override
-  State<RegistroCapPorFuncaoButton> createState() =>
-      _RegistroCapPorFuncaoButtonState();
+  State<FunctionRegisterCapButton> createState() =>
+      _FunctionRegisterCapButtonState();
 }
 
-class _RegistroCapPorFuncaoButtonState
-    extends State<RegistroCapPorFuncaoButton> {
+class _FunctionRegisterCapButtonState extends State<FunctionRegisterCapButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -31,9 +32,10 @@ class _RegistroCapPorFuncaoButtonState
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            borderRadius:
-                BorderRadius.circular(widget.constraints.maxWidth * 0.02),
-            color: widget.isSelected ? Colors.green : Colors.grey.shade900),
+          borderRadius:
+              BorderRadius.circular(widget.constraints.maxWidth * 0.02),
+          color: widget.isSelected ? Colors.green : AppColors().primaryColor,
+        ),
         height: widget.constraints.maxHeight * 0.17,
         width: widget.constraints.maxWidth * 0.28,
         child: Text(

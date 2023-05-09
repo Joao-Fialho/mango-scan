@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:mango_staff/presenter/components/series/resgistro_cap_por_funcao_button.dart';
+import 'package:mango_staff/src/presenter/components/series/function_register_cap_button.dart';
 
-class RegistroCapCard extends StatefulWidget {
-  const RegistroCapCard({super.key});
+class RegisterCapCard extends StatefulWidget {
+  final String capaImage;
+  final String tituloCap;
+  const RegisterCapCard({
+    super.key,
+    required this.capaImage,
+    required this.tituloCap,
+  });
 
   @override
-  State<RegistroCapCard> createState() => _RegistroCapCardState();
+  State<RegisterCapCard> createState() => _RegisterCapCardState();
 }
 
-class _RegistroCapCardState extends State<RegistroCapCard> {
+class _RegisterCapCardState extends State<RegisterCapCard> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -17,9 +23,9 @@ class _RegistroCapCardState extends State<RegistroCapCard> {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.grey.shade800,
-          borderRadius: BorderRadius.circular(size.width * 0.01),
+          borderRadius: BorderRadius.circular(size.width * 0.007),
         ),
-        padding: EdgeInsets.all(size.width * 0.01),
+        padding: EdgeInsets.all(size.width * 0.008),
         height: size.width * 0.15,
         child: LayoutBuilder(builder: (context, constraints) {
           return Row(
@@ -31,11 +37,10 @@ class _RegistroCapCardState extends State<RegistroCapCard> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius:
-                        BorderRadius.all(Radius.circular(size.width * 0.01)),
-                    image: const DecorationImage(
+                        BorderRadius.all(Radius.circular(size.width * 0.005)),
+                    image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: const NetworkImage(
-                          'https://cdn.discordapp.com/attachments/1089686820025016371/1090682171343241227/Como-Proteger-Al-Hermano-Mayor-De-La-Protagonista-T2-.jpg'),
+                      image: NetworkImage(widget.capaImage),
                     ),
                   ),
                 ),
@@ -44,13 +49,13 @@ class _RegistroCapCardState extends State<RegistroCapCard> {
                 width: constraints.maxWidth * 0.05,
               ),
               Expanded(
-                child: Container(
+                child: SizedBox(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Como Fazer meu Marido Ficar do Meu Lado',
+                        widget.tituloCap,
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -61,7 +66,7 @@ class _RegistroCapCardState extends State<RegistroCapCard> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      Container(
+                      SizedBox(
                         width: constraints.maxWidth * 0.28,
                         height: constraints.maxHeight * 0.18,
                         child: TextFormField(
@@ -94,7 +99,7 @@ class _RegistroCapCardState extends State<RegistroCapCard> {
                           ),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         height: constraints.maxHeight * 0.55,
                         width: constraints.maxWidth * 0.6,
                         child: Row(
@@ -104,14 +109,14 @@ class _RegistroCapCardState extends State<RegistroCapCard> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                RegistroCapPorFuncaoButton(
+                                FunctionRegisterCapButton(
                                     title: 'Tradutor',
                                     constraints: constraints),
                                 // SizedBox(height: size.width * .01),
-                                RegistroCapPorFuncaoButton(
+                                FunctionRegisterCapButton(
                                     title: 'Edicao', constraints: constraints),
                                 // SizedBox(height: size.width * .01),
-                                RegistroCapPorFuncaoButton(
+                                FunctionRegisterCapButton(
                                     title: 'Limpeza', constraints: constraints),
                               ],
                             ),

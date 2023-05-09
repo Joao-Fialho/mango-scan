@@ -70,6 +70,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_custom_text_input_formatter:
+    dependency: transitive
+    description:
+      name: flutter_custom_text_input_formatter
+      sha256: "36cb7d56736449da5c0fcda83e2e18b4de37fa3d47fd3de4042e3d02824e4a80"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -99,6 +107,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_triple:
+    dependency: "direct main"
+    description:
+      name: flutter_triple
+      sha256: "044d9951abd2c8da1d915437167832319ca6aaf8dac13b5a7fc3761c88dc29a6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
+  flutter_web_pagination:
+    dependency: "direct main"
+    description:
+      name: flutter_web_pagination
+      sha256: fac15a8c0d68905a82a43234b7943d3bcd01e81c08d1f25525cba099163a6a60
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   http:
     dependency: "direct main"
     description:
@@ -115,6 +139,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      sha256: "910f85bce16fb5c6f614e117efa303e85a1731bb0081edf3604a2ae6e9a3cc91"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.17.0"
   js:
     dependency: transitive
     description:
@@ -171,6 +203,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
+  number_pagination:
+    dependency: "direct main"
+    description:
+      name: number_pagination
+      sha256: e4ada9723f739c749752e35d273f171d864815281af8c2455b6466990aae076d
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3+2"
   path:
     dependency: transitive
     description:
@@ -179,6 +219,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.2"
+  rx_notifier:
+    dependency: transitive
+    description:
+      name: rx_notifier
+      sha256: eb67724d2783d8fe67d4619d7f97bc4878e0e62a6b50e6bed6ec47361148c055
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.2"
+  rx_notifier_annotation:
+    dependency: transitive
+    description:
+      name: rx_notifier_annotation
+      sha256: "362496563d617aa6fa21ab9c131f66348f3266b6580d69ecc23d2c23a52070a2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -232,6 +288,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.16"
+  triple:
+    dependency: transitive
+    description:
+      name: triple
+      sha256: "210eb1298db3d09465c6ea128413ffcb4859cb1140009f895d69efe439f9367c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   typed_data:
     dependency: transitive
     description:
@@ -250,3 +314,4 @@ packages:
     version: "2.1.4"
 sdks:
   dart: ">=2.19.3 <3.0.0"
+  flutter: ">=1.17.0"
