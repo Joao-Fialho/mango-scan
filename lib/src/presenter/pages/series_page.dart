@@ -21,20 +21,20 @@ class SeriesPage extends StatefulWidget {
 class _SeriesPageState extends State<SeriesPage> {
   SeriesPageController controller = SeriesPageController();
   int selectedPageNumber = 1;
-  int pageItemCount = 10;
+  String searchValue = '';
+
+  late int pageItemCount;
   @override
   void initState() {
     // controller.seriesList = controller.listMockMetodo();
 
-    super.initState();
     controller.getSeriesList();
+    super.initState();
   }
 
-  String searchValue = '';
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    print("largura series ${size.width}");
 
     return Scaffold(
       backgroundColor: AppColors().primaryColor,
@@ -49,14 +49,20 @@ class _SeriesPageState extends State<SeriesPage> {
               ///Monitor Padrao
               //TODO - Implementar regra para atualizar tela depois que mudar a resolucao
               if (size.width > 1930) {
+                pageItemCount = 15;
+
+                if (searchValue != '') {
+                  controller.searchByTitle(searchValue);
+                }
+                controller.separateListByPage(
+                    pageItemCount, selectedPageNumber);
                 // if (selectedPageNumber >
                 //     controller.pageTotalCalculator(
                 //         controller.listMock.length, pageItemCount)) {
                 //   selectedPageNumber = 1;
 
                 // }
-                pageItemCount = 15;
-                
+
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -71,15 +77,20 @@ class _SeriesPageState extends State<SeriesPage> {
                             children: [
                               ///Barra de pesquisa
 
-                              SeriesSearchBarComponent(
-                                onChanged: (value) {
-                                  searchValue = value;
-                                  setState(() {
-                                    controller.searchByTitle(searchValue);
-                                  });
-                                },
-                                constraints: constraints,
-                              ),
+                              ScopedBuilder<SeriesPageController,
+                                      List<SeriesEntity>>(
+                                  store: controller,
+                                  onState: (context, state) {
+                                    return SeriesSearchBarComponent(
+                                      onChanged: (value) {
+                                        searchValue = value;
+                                        // setState(() {
+                                        //   controller.searchByTitle(searchValue);
+                                        // });
+                                      },
+                                      constraints: constraints,
+                                    );
+                                  }),
 
                               SizedBox(
                                 height: constraints.maxHeight * .02,
@@ -97,55 +108,57 @@ class _SeriesPageState extends State<SeriesPage> {
                     Flexible(
                       flex: 8,
                       child: SizedBox(
-                        width: size.width * 0.73,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: GridView.builder(
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisSpacing: 20,
-                                    mainAxisSpacing: 20,
-                                    childAspectRatio: 15 / 8,
-                                    crossAxisCount: 3,
+                        width: size.width * 0.7,
+                        child: ScopedBuilder<SeriesPageController,
+                                List<SeriesEntity>>(
+                            store: controller,
+                            onError: (context, error) => Container(),
+                            onLoading: (context) => Container(),
+                            onState: (context, state) {
+                              return Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: GridView.builder(
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisSpacing: 20,
+                                          mainAxisSpacing: 20,
+                                          childAspectRatio: 16 / 9,
+                                          crossAxisCount: 3,
+                                        ),
+                                        itemCount: state.length,
+                                        itemBuilder: (BuildContext ctx, index) {
+                                          return RegisterCapCard(
+                                            tituloCap:
+                                                state[index].nome.toString(),
+                                            capaImage:
+                                                state[index].capa.toString(),
+                                          );
+                                        }),
                                   ),
-                                  itemCount: controller
-                                      .separateListByPage(
-                                          pageItemCount, selectedPageNumber)
-                                      .length,
-                                  itemBuilder: (BuildContext ctx, index) {
-                                    return RegisterCapCard(
-                                      tituloCap: controller
-                                          .separateListByPage(pageItemCount,
-                                              selectedPageNumber)[index]
-                                          .nome
-                                          .toString(),
-                                      capaImage: controller
-                                          .separateListByPage(pageItemCount,
-                                              selectedPageNumber)[index]
-                                          .capa
-                                          .toString(),
-                                    );
-                                  }),
-                            ),
-                            SizedBox(
-                              child: NumberPagination(
-                                onPageChanged: (int pageNumber) {
-                                  setState(() {
-                                    selectedPageNumber = pageNumber;
-                                  });
-                                },
-                                pageTotal: controller.pageTotalCalculator(
-                                    controller.seriesList.length,
-                                    pageItemCount),
-                                pageInit: 1, // picked number when init page
-                                colorPrimary: Colors.white,
-                                colorSub: AppColors().sencondColor,
-                              ),
-                            ),
-                          ],
-                        ),
+                                  SizedBox(
+                                    child: NumberPagination(
+                                      onPageChanged: (int pageNumber) {
+                                        setState(() {
+                                          selectedPageNumber = pageNumber;
+                                          controller.separateListByPage(
+                                              pageItemCount,
+                                              selectedPageNumber);
+                                        });
+                                      },
+                                      pageTotal: controller
+                                          .pageTotalCalculator(pageItemCount),
+                                      pageInit:
+                                          1, // picked number when init page
+                                      colorPrimary: Colors.white,
+                                      colorSub: AppColors().sencondColor,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }),
                       ),
                     ),
                   ],
@@ -153,103 +166,108 @@ class _SeriesPageState extends State<SeriesPage> {
               } else if (size.width >= 960 && size.width <= 1930) {
                 pageItemCount = 10;
 
+                controller.separateListByPage(
+                    pageItemCount, selectedPageNumber);
+
                 return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ///Historico de Registros
-                    Flexible(
-                      flex: 2,
-                      child: LayoutBuilder(builder: (context, constraints) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ///Barra de pesquisa
-                            SeriesSearchBarComponent(
-                              onChanged: (value) {
-                                searchValue = value;
-                                setState(() {
-                                  controller.searchByTitle(searchValue);
-                                });
-                              },
-                              constraints: constraints,
-                            ),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ///Historico de Registros
+                      Flexible(
+                        flex: 2,
+                        child: LayoutBuilder(builder: (context, constraints) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              ///Barra de pesquisa
+                              SeriesSearchBarComponent(
+                                onChanged: (value) {
+                                  // searchValue = value;
+                                  // setState(() {
+                                  //   controller.searchByTitle(searchValue);
+                                  // });
+                                },
+                                constraints: constraints,
+                              ),
 
-                            SizedBox(
-                              height: constraints.maxHeight * 0.02,
-                            ),
-                            Expanded(
-                                child: HistoryCapDoneCard(
-                                    constraints: constraints))
-                          ],
-                        );
-                      }),
-                    ),
+                              SizedBox(
+                                height: constraints.maxHeight * 0.02,
+                              ),
+                              Expanded(
+                                  child: HistoryCapDoneCard(
+                                      constraints: constraints))
+                            ],
+                          );
+                        }),
+                      ),
 
-                    ///Lista de series para resgistrarem
-                    Flexible(
-                      flex: 5,
-                      child: SizedBox(
-                        width: size.width * 0.6,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: GridView.builder(
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisSpacing: 20,
-                                    mainAxisSpacing: 20,
-                                    childAspectRatio: 15 / 8,
-                                    crossAxisCount: 2,
-                                  ),
-                                  itemCount: controller
-                                      .separateListByPage(
-                                          pageItemCount, selectedPageNumber)
-                                      .length,
-                                  itemBuilder: (BuildContext ctx, index) {
-                                    return RegisterCapCard(
-                                      tituloCap: controller
-                                          .separateListByPage(pageItemCount,
-                                              selectedPageNumber)[index]
-                                          .nome
-                                          .toString(),
-                                      capaImage: controller
-                                          .separateListByPage(pageItemCount,
-                                              selectedPageNumber)[index]
-                                          .capa
-                                          .toString(),
+                      ///Lista de series para resgistrarem
+                      Flexible(
+                        flex: 5,
+                        child: SizedBox(
+                          width: size.width * 0.6,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              ScopedBuilder<SeriesPageController,
+                                      List<SeriesEntity>>(
+                                  store: controller,
+                                  onError: (context, error) => Container(),
+                                  onLoading: (context) => Container(),
+                                  onState: (context, state) {
+                                    return Expanded(
+                                      child: GridView.builder(
+                                          gridDelegate:
+                                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisSpacing: 20,
+                                            mainAxisSpacing: 20,
+                                            childAspectRatio: 15 / 8,
+                                            crossAxisCount: 2,
+                                          ),
+                                          itemCount: state.length,
+                                          itemBuilder:
+                                              (BuildContext ctx, index) {
+                                            return RegisterCapCard(
+                                              tituloCap:
+                                                  state[index].nome.toString(),
+                                              capaImage:
+                                                  state[index].capa.toString(),
+                                            );
+                                          }),
                                     );
                                   }),
-                            ),
-                            SizedBox(
-                              child: NumberPagination(
-                                threshold:
-                                    controller.thresholdCalculator(size.width),
-                                onPageChanged: (int pageNumber) {
-                                  //do somthing for selected page
-                                  setState(() {
-                                    selectedPageNumber = pageNumber;
-                                  });
-                                },
-                                pageTotal: controller.pageTotalCalculator(
-                                    controller.seriesList.length,
-                                    pageItemCount),
-                                pageInit: 1, // picked number when init page
-                                colorPrimary: Colors.white,
-                                colorSub: AppColors().sencondColor,
+                              SizedBox(
+                                child: NumberPagination(
+                                  threshold: controller
+                                      .thresholdCalculator(size.width),
+                                  onPageChanged: (int pageNumber) {
+                                    //do somthing for selected page
+                                    setState(() {
+                                      selectedPageNumber = pageNumber;
+                                      controller.separateListByPage(
+                                          pageItemCount, selectedPageNumber);
+                                    });
+                                  },
+                                  pageTotal: controller
+                                      .pageTotalCalculator(pageItemCount),
+                                  pageInit: 1, // picked number when init page
+                                  colorPrimary: Colors.white,
+                                  colorSub: AppColors().sencondColor,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+
+                            ///
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
-                );
+                      )
+                    ]);
 
                 ///Metade de um Monitor Padrao
               } else if (size.width < 960) {
                 pageItemCount = 10;
-
+                controller.separateListByPage(
+                    pageItemCount, selectedPageNumber);
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -288,57 +306,57 @@ class _SeriesPageState extends State<SeriesPage> {
                       flex: 4,
                       child: SizedBox(
                         width: size.width * 0.5,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: GridView.builder(
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisSpacing: 20,
-                                    mainAxisSpacing: 20,
-                                    childAspectRatio: 15 / 8,
-                                    crossAxisCount: 1,
+                        child: ScopedBuilder<SeriesPageController,
+                                List<SeriesEntity>>(
+                            store: controller,
+                            onState: (context, state) {
+                              return Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: GridView.builder(
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisSpacing: 20,
+                                          mainAxisSpacing: 20,
+                                          childAspectRatio: 15 / 8,
+                                          crossAxisCount: 1,
+                                        ),
+                                        itemCount: state.length,
+                                        itemBuilder: (BuildContext ctx, index) {
+                                          return RegisterCapCard(
+                                            tituloCap:
+                                                state[index].nome.toString(),
+                                            capaImage:
+                                                state[index].capa.toString(),
+                                          );
+                                        }),
                                   ),
-                                  itemCount: controller
-                                      .separateListByPage(
-                                          pageItemCount, selectedPageNumber)
-                                      .length,
-                                  itemBuilder: (BuildContext ctx, index) {
-                                    return RegisterCapCard(
-                                      tituloCap: controller
-                                          .separateListByPage(pageItemCount,
-                                              selectedPageNumber)[index]
-                                          .nome
-                                          .toString(),
-                                      capaImage: controller
-                                          .separateListByPage(pageItemCount,
-                                              selectedPageNumber)[index]
-                                          .capa
-                                          .toString(),
-                                    );
-                                  }),
-                            ),
-                            SizedBox(
-                              child: NumberPagination(
-                                threshold:
-                                    controller.thresholdCalculator(size.width),
-                                onPageChanged: (int pageNumber) {
-                                  //do somthing for selected page
-                                  setState(() {
-                                    selectedPageNumber = pageNumber;
-                                  });
-                                },
-                                pageTotal: controller.pageTotalCalculator(
-                                    controller.seriesList.length,
-                                    pageItemCount),
-                                pageInit: 1, // picked number when init page
-                                colorPrimary: Colors.white,
-                                colorSub: AppColors().sencondColor,
-                              ),
-                            ),
-                          ],
-                        ),
+                                  SizedBox(
+                                    child: NumberPagination(
+                                      threshold: controller
+                                          .thresholdCalculator(size.width),
+                                      onPageChanged: (int pageNumber) {
+                                        //do somthing for selected page
+                                        setState(() {
+                                          selectedPageNumber = pageNumber;
+                                          controller.separateListByPage(
+                                              pageItemCount,
+                                              selectedPageNumber);
+                                        });
+                                      },
+                                      pageTotal: controller
+                                          .pageTotalCalculator(pageItemCount),
+                                      pageInit:
+                                          1, // picked number when init page
+                                      colorPrimary: Colors.white,
+                                      colorSub: AppColors().sencondColor,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }),
                       ),
                     ),
                   ],

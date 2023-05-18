@@ -111,9 +111,9 @@ class _HistoryCapDoneCardState extends State<HistoryCapDoneCard> {
               Expanded(
                 child: ListView.separated(
                   separatorBuilder: (context, index) => SizedBox(
-                    height: size.height * 0.01,
+                    height: size.width * 0.008,
                   ),
-                  itemCount: 15,
+                  itemCount: 50,
                   itemBuilder: (context, index) {
                     return CapDoneCard(
                       constraints: constraints,
